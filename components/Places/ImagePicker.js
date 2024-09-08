@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Colors } from "../../constants/colors";
 import OutlinedButton from "../UI/OutlinedButton";
 
-export default function ImagePicker() {
+export default function ImagePicker({ onImageTaken }) {
   const [pickedImage, setPickedImage] = useState("");
   const [cameraPermissionInformation, requestPermission] =
     useCameraPermissions();
@@ -51,6 +51,7 @@ export default function ImagePicker() {
 
     if (!image.canceled && image.assets && image.assets.length > 0) {
       setPickedImage(image.assets[0].uri);
+      onImageTaken(image.assets[0].uri);
     } else {
       // 处理用户取消或其他情况
       setPickedImage("");
@@ -76,12 +77,13 @@ export default function ImagePicker() {
 const styles = StyleSheet.create({
   imagePreview: {
     width: "100%",
-    height: 200,
+    height: 160,
     marginVertical: 8,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.primary100,
     borderRadius: 4,
+    overflow: "hidden",
   },
   image: {
     width: "100%",

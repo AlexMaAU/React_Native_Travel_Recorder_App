@@ -10,7 +10,7 @@ export default function OutlinedButton({ onPress, icon, children }) {
     >
       <Ionicons
         style={styles.icon}
-        icon={icon}
+        name={icon}
         size={18}
         color={Colors.primary500}
       />
